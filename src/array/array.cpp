@@ -119,4 +119,59 @@ Array temp =Array(indices...);
 }
 
 
+Array linspace(float start, float end, int num){
+    Array temp =Array(num);
+    float step = (end-start)/(num-1);
+    for(int i=0;i<num;i++){
+        temp.data[i]=start+i*step;
+    }
+    return temp;
+}
+
+
+
+
+template <typename... Indices>
+Array arrange(Indices... indices){
+
+    constexpr int num_dims = sizeof...(Indices);
+
+    std::vector<float> shape_vec = {static_cast<float>(indices)...};             // shape in vector to calulate the total size
+    
+
+    if (num_dims==1){
+        Array temp =Array(indices...);
+        for(int i=0;i<shape_vec[0];i++){
+            temp.data[i]=i;
+            return temp;
+        
+        }
+    }
+    else if (num_dims == 2){
+        int size=(shape_vec[1]-shape_vec[0]);
+        Array temp=Array(size);
+        for(int i=0;i<size;i++){
+            temp.data[i]=shape_vec[0]+i;
+        }
+        return temp;
+    }
+
+    else if (num_dims == 3){
+        int size=(shape_vec[1] - shape_vec[0]) / shape_vec[2];
+        Array temp=Array(size);
+        for(int i=0;i<size;i++){
+            temp.data[i]=shape_vec[0] + i*shape_vec[2];
+        }
+
+
+        return temp;
+    }
+    else{
+        throw std::out_of_range("Index out of bounds.");
+
+    }
+    return 0;
+}
+
+
 
