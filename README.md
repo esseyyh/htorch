@@ -7,7 +7,7 @@ as it is, it is a simple auto grad engine for cpp currently only supports diff o
 since it built on top of xtensor cpp library it is horribly slow to use and i hope to write the matmul and its def functions soon to make it faster 
 
 ### TODO
-
+- [ ] change the default tensor from xtensor to a custom array
 - [ ] add matmul and its diff
 - [ ] add structs for arrays instead of using xtensor
 - [ ] add more basic nn functions
